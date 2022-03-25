@@ -31,23 +31,13 @@ public class LinkedList {
         }
     }
 
-    public int removeHead(boolean printVal) {
+    public int removeHead() {
         if (this.head == null)
             return -1;
         this.length--;
         LinkedListNode cur = this.head;
         this.head = this.head.getNext();
         return cur.getVal();
-
-    }
-
-    public void removeHead() {
-        if (this.head == null)
-            System.out.println("LL is empty!");
-        else {
-            this.length--;
-            this.head = this.head.getNext();
-        }
     }
 
     public void swap(int data1, int data2) {
