@@ -40,4 +40,9 @@ public class LinkedListNode {
     public String getKey() {
         return this.key;
     }
+
+    public void setKeyVal(String key, int val) {
+        this.key = key;
+        this.value = val;
+    }
 }
