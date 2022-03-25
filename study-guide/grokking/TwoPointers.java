@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -162,6 +163,31 @@ public class TwoPointers {
             }
         }
         return count;
+    }
+
+    public static List<List<Integer>> findSubarrays(int[] arr, int target) {
+        // Time: O(n^3), Space: O(n^3)
+        // in the worst case, we will have n(n+1)/2 choices of indices
+        // this problem uses a combination of sliding window and two pointers
+        List<List<Integer>> subarrays = new ArrayList<>();
+        double product = 1;
+        int p1 = 0;
+        for (int i = 0; i < arr.length; i++) {
+            product *= arr[i]; // we increment our product by the next value in the array
+            while (product >= target && p1 < arr.length) { // if the product is larger than our target value and p1 is
+                                                           // smaller than the array length, then we can divide our
+                                                           // product by the left pointer
+                product /= arr[p1++];
+            }
+            List<Integer> temp = new LinkedList<>(); // create a temporary list to iterate through to capture subarrays
+            for (int cur = i; cur >= p1; cur--) { // i and cur act as our p2 or left pointer, so as long as p2 >= p1
+                temp.add(0, arr[cur]); // we want to add the left most val to our linked list
+                subarrays.add(new ArrayList<>(temp)); // to then add to our subarrays list; as the for-loop decrements,
+                                                      // more values are added to the temp list and further added to the
+                                                      // subarrays list
+            }
+        }
+        return subarrays;
     }
 
     public static void main(String[] args) {
