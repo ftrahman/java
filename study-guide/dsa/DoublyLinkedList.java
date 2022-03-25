@@ -12,6 +12,7 @@ public class DoublyLinkedList {
     }
 
     public void addToHead(int data) {
+        this.length++;
         LinkedListNode newNode = new LinkedListNode(data);
         if (this.head == null) {
             this.head = newNode;
@@ -24,6 +25,7 @@ public class DoublyLinkedList {
     }
 
     public void addToTail(int data) {
+        this.length++;
         LinkedListNode newNode = new LinkedListNode(data);
         if (this.tail == null) {
             this.head = newNode;
@@ -41,6 +43,7 @@ public class DoublyLinkedList {
         }
         LinkedListNode remove = this.head;
         this.head = this.head.getNext();
+        this.length--;
         if (this.head != null)
             this.head.setPrev(null);
         if (remove == this.tail)
@@ -54,6 +57,7 @@ public class DoublyLinkedList {
         }
         LinkedListNode remove = this.tail;
         this.tail = this.tail.getPrev();
+        this.length--;
         if (this.tail != null)
             this.tail.setNext(null);
         if (remove == this.head) {
@@ -79,12 +83,12 @@ public class DoublyLinkedList {
         if (cur == this.tail)
             removeTail();
         else {
+            this.length--;
             LinkedListNode prev = cur.getPrev();
             LinkedListNode next = cur.getNext();
             prev.setNext(next);
             next.setPrev(prev);
         }
-        System.out.println(cur.getVal());
         return cur.getVal();
     }
 

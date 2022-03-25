@@ -32,9 +32,9 @@ public class LinkedList {
     }
 
     public int removeHead(boolean printVal) {
-        this.length--;
         if (this.head == null)
             return -1;
+        this.length--;
         LinkedListNode cur = this.head;
         this.head = this.head.getNext();
         return cur.getVal();
@@ -42,10 +42,10 @@ public class LinkedList {
     }
 
     public void removeHead() {
-        this.length--;
         if (this.head == null)
             System.out.println("LL is empty!");
         else {
+            this.length--;
             this.head = this.head.getNext();
         }
     }
