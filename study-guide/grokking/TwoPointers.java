@@ -92,6 +92,24 @@ public class TwoPointers {
         return triplets;
     }
 
+    public static int searchTriplets(int[] arr, int target) {
+        int count = 0;
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length - 2; i++) {
+            int p1 = i + 1;
+            int p2 = arr.length - 1;
+            while (p1 < p2) {
+                if (arr[p1] + arr[p2] < target - arr[i]) {
+                    count += p2 - p1;
+                    p1++;
+                } else {
+                    p2--;
+                }
+            }
+        }
+        return count;
+    }
+
     public static int searchTripletForNearest(int[] arr, int targetSum) {
         // Time: O(n^2), Space: O(n)
         // here we can approach similarly to the previous problem, except we are now
@@ -107,7 +125,8 @@ public class TwoPointers {
                                                                      // (target - (X + Y + Z))
                 if (curMin == 0) // the minimum difference is 0, we have found the closest minimum difference
                     return targetSum;
-                if (Math.abs(curMin) < Math.abs(minDiff) // if the abs(currentMin) is smaller than the abs(savedMin) OR if
+                if (Math.abs(curMin) < Math.abs(minDiff) // if the abs(currentMin) is smaller than the abs(savedMin) OR
+                                                         // if
                                                          // the abs(currentMin) is the same as the abs(savedMin) AND the
                                                          // currentMin is a greater value than the savedMin
                         || Math.abs(curMin) == Math.abs(minDiff) && curMin > minDiff) {
@@ -120,6 +139,29 @@ public class TwoPointers {
             }
         }
         return targetSum - minDiff;
+    }
+
+    public static int searchTripletWithSmallerSum(int[] arr, int target) {
+        // Time: O(n^2), Space: O(n)
+        // again, similar approach to previous problems, but needing to find triplet
+        // that will be smaller than the target sum, can approach using
+        // X + Y < target - Z
+        int count = 0;
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length - 2; i++) {
+            int p1 = i + 1; // X
+            int p2 = arr.length - 1; // Y
+            while (p1 < p2) {
+                if (arr[p1] + arr[p2] < target - arr[i]) { // X + Y < target - Z
+                    count += p2 - p1; // if true, all values between index p2 and p1 will satify this condition
+                                      // because the array is sorted
+                    p1++; // increment X
+                } else {
+                    p2--; // we need a pair with a smaller sum
+                }
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {
