@@ -1,7 +1,5 @@
 public class FastSlowPointers {
 
-    private static Object Node;
-
     public static boolean detectCycle(Node head) {
         Node slow = head;
         Node fast = head;
