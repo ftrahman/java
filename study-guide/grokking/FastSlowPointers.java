@@ -1,6 +1,7 @@
 public class FastSlowPointers {
 
     public static boolean detectCycle(Node head) {
+        // Time: O(n), Space: O(1)
         Node slow = head;
         Node fast = head;
         while (fast != null && fast.next != null) {
@@ -13,6 +14,7 @@ public class FastSlowPointers {
     }
 
     public static int detectCycleLength(Node head) {
+        // Time: O(n), Space: O(1)
         Node slow = head;
         Node fast = head;
         int length = 0;
@@ -32,6 +34,7 @@ public class FastSlowPointers {
     }
 
     public static Node findCycleStart(Node head) {
+        // Time: O(n), Space: O(1)
         Node fast = head;
         Node slow = head;
         int length = 0;
@@ -61,5 +64,39 @@ public class FastSlowPointers {
             }
         }
         return null;
+    }
+
+    public static boolean findHappyNumber(int num) {
+        // Time: O(log(n)), Space: O(1)
+        int slow = num;
+        int fast = num;
+        do {
+            slow = squareSum(slow);
+            fast = squareSum(squareSum(fast)); // repeat the function twice on the same number to be ahead of slow
+        } while (fast != slow); // eventually, we know that the sequence of numbers will repeat the cycle
+                                // because we end up at 1 or slow and fast meet up
+        return slow == 1;
+    }
+
+    public static int squareSum(int num) {
+        // This is a helper function connected to the above function
+        int digit = 0;
+        int sum = 0;
+        while (num != 0) {
+            digit = num % 10;
+            sum += digit * digit;
+            num /= 10;
+        }
+        return sum;
+    }
+
+    public static Node findMiddle(Node head) {
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
     }
 }
