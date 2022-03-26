@@ -99,4 +99,42 @@ public class FastSlowPointers {
         }
         return slow;
     }
+
+    public static boolean isPalindrome(Node head) {
+        // Time: O(n), Space: O(1)
+        // can use the below commented lines but don't have to
+        // if (head == null || head.next == null)
+        // return true;
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null) { // find the middle of the LL
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Node reverse = reverse(slow); // once found, we want to reverse the second half of the LL
+        Node reverseHead = reverse; // save the head of the reversedList
+        while (reverse != null && head != null) { // iterate and compare our original list and
+            if (reverse.value != head.value) { // if the values aren't the same, return false
+                return false;
+            }
+            reverse = reverse.next;
+            head = head.next;
+        }
+        reverse(reverseHead); // unreverse the the list to return the original list
+        if (head == null || reverse == null) // if the heads of either list are null, return true
+            return true;
+        return false;
+    }
+
+    public static Node reverse(Node head) {
+        // Helper code to reverse a linked list
+        Node prev = null;
+        while (head != null) {
+            Node next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
+        }
+        return prev;
+    }
 }
