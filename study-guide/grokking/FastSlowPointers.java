@@ -91,9 +91,11 @@ public class FastSlowPointers {
     }
 
     public static Node findMiddle(Node head) {
+        // Time: O(n), Space: O(1)
         Node fast = head;
         Node slow = head;
-        while (fast != null && fast.next != null) {
+        while (fast != null && fast.next != null) { // Fast moves 2x quicker than slow, so when fast is null, slow is in
+                                                    // the middle of the list
             slow = slow.next;
             fast = fast.next.next;
         }
@@ -136,5 +138,26 @@ public class FastSlowPointers {
             head = next;
         }
         return prev;
+    }
+
+    public static void reorder(Node head) {
+        Node fast = head;
+        Node slow = head;
+        while (fast != null && fast.next != null) { // find the middle of the LL
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Node reverse = reverse(slow); // once found, we want to reverse the second half of the LL
+        while (reverse != null && head != null) { // iterate and compare our original list and
+            Node temp = head.next;
+            head.next = reverse;
+            head = temp;
+            temp = reverse.next;
+            reverse.next = head;
+            reverse = temp;
+        }
+        if (head != null) {
+            head.next = null;
+        }
     }
 }
