@@ -45,4 +45,34 @@ public class BST {
         return null;
     }
 
+    public void preorder() {
+        System.out.println(this.data + " ");
+        if (this.left != null) {
+            this.left.preorder();
+        }
+        if (this.right != null) {
+            this.right.preorder();
+        }
+    }
+
+    public void inorder() {
+        if (this.left != null) {
+            this.left.inorder();
+        }
+        System.out.println(this.data + " ");
+        if (this.right != null) {
+            this.right.inorder();
+        }
+    }
+
+    public void postorder() {
+        if (this.left != null) {
+            this.left.postorder();
+        }
+        if (this.right != null) {
+            this.right.postorder();
+        }
+        System.out.println(this.data + " ");
+    }
+
 }
