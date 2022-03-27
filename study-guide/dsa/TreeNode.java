@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class TreeNode {
-    private Object data;
-    private ArrayList<TreeNode> children;
+    public Object data;
+    public ArrayList<TreeNode> children;
 
     public TreeNode(Object data) {
         this.children = new ArrayList<TreeNode>();
